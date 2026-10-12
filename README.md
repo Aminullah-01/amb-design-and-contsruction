@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AMB Design and Construction Limited — Website
 
 Static, frontend-only portfolio website for **AMB Design and Construction Limited** (Nigeria).
@@ -72,6 +71,39 @@ The `@/` path alias points at `src/` (configured in `vite.config.ts` and `tsconf
   imported or published.
 - Never invent facts, project details, numbers or testimonials — use `[ADD ...]` placeholders.
 
+## Project before/after comparison
+
+Project entries in `src/content/projects.ts` may include an optional `beforeAfter` object. When
+present, the project detail page renders a draggable `BeforeAfterSlider`; projects without the field
+render nothing, so no project needs it yet.
+
+```ts
+{
+  slug: 'example-project',
+  // ...other project fields
+  beforeAfter: {
+    before: {
+      src: '/images/projects/example-render.webp',
+      alt: '3D render of the proposed building',
+    },
+    after: {
+      src: '/images/projects/example-built.webp',
+      alt: 'Photograph of the completed building',
+    },
+    beforeLabel: 'Render',
+    afterLabel: 'Built',
+    caption: 'Design render compared with the completed build.',
+  },
+}
+```
+
+- `beforeLabel` / `afterLabel` default to `Before` / `After`; use `Render` / `Built` when comparing a
+  visualization with the finished build.
+- `caption` is optional.
+- Only cleared images may be referenced.
+- The slider is operated by dragging with mouse, pen or touch, or by focusing the handle and using
+  the arrow keys (hold Shift for larger steps, or press Home/End).
+
 ## Deployment
 
 Run `npm run build` and deploy the `dist/` folder to any static host. Ensure the host rewrites
@@ -81,6 +113,3 @@ unknown paths to `index.html` so client-side routes (for example `/portfolio`) r
 
 Task **T01 (project setup)** complete: scaffolding, routing, tooling and placeholder pages.
 Page content and design tokens are added in later tasks.
-=======
-# amb-design-and-contsruction
->>>>>>> 0899de32ca3f180d50dd863c007269a1993bd0f0

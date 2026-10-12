@@ -10,7 +10,7 @@ const imagesRoot = path.join(root, 'public', 'images')
 // Directories whose images are cleared for publication. Each source gets a
 // full-size WebP and an 800px-wide "card" WebP. Images in needs-clearance are
 // intentionally never touched.
-const CLEARED_DIRS = ['projects']
+const CLEARED_DIRS = ['projects', 'mockups']
 
 // Assets that are recorded in the manifest but not re-encoded.
 const RECORD_ONLY = ['brand/logo.png', 'brand/favicon.png', 'brand/og-image.png']

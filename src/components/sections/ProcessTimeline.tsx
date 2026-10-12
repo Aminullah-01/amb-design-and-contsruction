@@ -43,19 +43,49 @@ export default function ProcessTimeline({ variant = 'compact', className }: Proc
               </span>
             </div>
 
-            <div className={clsx(!full && 'lg:mt-5')}>
-              <h3 className="font-heading text-lg font-bold text-ink-900">{step.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{step.short}</p>
+            <div className={clsx('w-full', !full && 'lg:mt-5')}>
+              <h3
+                className={clsx(
+                  'font-heading font-bold text-ink-900',
+                  full ? 'text-xl md:text-2xl' : 'text-lg',
+                )}
+              >
+                {step.title}
+              </h3>
+              <p
+                className={clsx(
+                  'mt-1.5 text-sm leading-relaxed text-ink-600',
+                  full && 'md:text-base',
+                )}
+              >
+                {step.short}
+              </p>
 
-              {full && step.outputs.length > 0 ? (
-                <ul className="mt-3 space-y-1.5">
-                  {step.outputs.map((output) => (
-                    <li key={output} className="flex items-start gap-2 text-sm text-ink-600">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" aria-hidden="true" />
-                      {output}
-                    </li>
+              {full ? (
+                <div className="mt-5 grid gap-5 sm:grid-cols-3">
+                  {[
+                    { label: 'What you do', items: step.youDo },
+                    { label: 'What we do', items: step.weDo },
+                    { label: 'What you receive', items: step.outputs },
+                  ].map((group) => (
+                    <div key={group.label}>
+                      <h4 className="text-xs font-semibold tracking-[0.12em] text-blue-700 uppercase">
+                        {group.label}
+                      </h4>
+                      <ul className="mt-2 space-y-1.5">
+                        {group.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-ink-600">
+                            <Check
+                              className="mt-0.5 h-4 w-4 shrink-0 text-blue-600"
+                              aria-hidden="true"
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               ) : null}
             </div>
           </li>

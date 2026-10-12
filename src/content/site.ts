@@ -39,6 +39,11 @@ export const site: SiteInfo = {
   email: '[CONFIRM EMAIL]',
   address: '[ADD ADDRESS]',
   workingHours: '[ADD HOURS]',
+  mapUrl: '[ADD MAP URL]',
+  credentials: {
+    cacNumber: '[ADD CAC NUMBER]',
+    memberships: [],
+  },
   cta: {
     label: 'Get a Free Quote',
     to: '/contact',

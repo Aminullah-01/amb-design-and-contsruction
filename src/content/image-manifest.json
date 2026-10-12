@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T13:01:11.922Z",
+  "generatedAt": "2026-10-12T11:41:15.469Z",
   "images": {
     "/images/projects/duplex-glass-corner-01.webp": {
       "width": 735,
@@ -48,6 +48,30 @@
     "/images/projects/villa-aerial-pool-01-card.webp": {
       "width": 736,
       "height": 736
+    },
+    "/images/mockups/cap-mockup.webp": {
+      "width": 961,
+      "height": 1280
+    },
+    "/images/mockups/cap-mockup-card.webp": {
+      "width": 800,
+      "height": 1066
+    },
+    "/images/mockups/helmet-mockup.webp": {
+      "width": 1166,
+      "height": 1166
+    },
+    "/images/mockups/helmet-mockup-card.webp": {
+      "width": 800,
+      "height": 800
+    },
+    "/images/mockups/vest-mockup.webp": {
+      "width": 1038,
+      "height": 1030
+    },
+    "/images/mockups/vest-mockup-card.webp": {
+      "width": 800,
+      "height": 794
     },
     "/images/brand/logo.png": {
       "width": 1298,

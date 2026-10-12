@@ -173,7 +173,9 @@ export default function ServiceDetailPage() {
           </Section>
         ) : null}
 
-        {service.faqs.length > 0 ? <FaqAccordion faqs={service.faqs} /> : null}
+        {service.faqs.length > 0 ? (
+          <FaqAccordion faqs={service.faqs} intro="Answers to common questions about this service." />
+        ) : null}
 
         <CTABand />
       </div>

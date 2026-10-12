@@ -42,6 +42,11 @@ export type SiteInfo = {
   email: string
   address: string
   workingHours: string
+  mapUrl?: string
+  credentials: {
+    cacNumber: string
+    memberships: string[]
+  }
   cta: {
     label: string
     to: string
@@ -61,7 +66,14 @@ export type ProcessStage = {
   title: string
   short: string
   icon: string
+  youDo: string[]
+  weDo: string[]
   outputs: string[]
+}
+
+export type PreparationItem = {
+  title: string
+  text: string
 }
 
 export type Faq = {
@@ -96,6 +108,14 @@ export type ProjectImage = {
   caption?: string
 }
 
+export type BeforeAfter = {
+  before: ProjectImage
+  after: ProjectImage
+  beforeLabel?: string
+  afterLabel?: string
+  caption?: string
+}
+
 export type Project = {
   slug: string
   title: string
@@ -107,8 +127,11 @@ export type Project = {
   status: ProjectStatus
   servicesProvided: string[]
   overview: string
+  challenge?: string
+  solution?: string
   coverImage: ProjectImage
   gallery: ProjectImage[]
+  beforeAfter?: BeforeAfter
   featured: boolean
   cleared: boolean
 }

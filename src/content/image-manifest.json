@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-10-11T13:01:11.922Z",
+  "images": {
+    "/images/projects/duplex-glass-corner-01.webp": {
+      "width": 735,
+      "height": 580
+    },
+    "/images/projects/duplex-glass-corner-01-card.webp": {
+      "width": 735,
+      "height": 580
+    },
+    "/images/projects/scale-model-bungalow-estate-01.webp": {
+      "width": 1280,
+      "height": 960
+    },
+    "/images/projects/scale-model-bungalow-estate-01-card.webp": {
+      "width": 800,
+      "height": 600
+    },
+    "/images/projects/scale-model-compound-01.webp": {
+      "width": 1280,
+      "height": 960
+    },
+    "/images/projects/scale-model-compound-01-card.webp": {
+      "width": 800,
+      "height": 600
+    },
+    "/images/projects/scale-model-compound-02.webp": {
+      "width": 1280,
+      "height": 960
+    },
+    "/images/projects/scale-model-compound-02-card.webp": {
+      "width": 800,
+      "height": 600
+    },
+    "/images/projects/villa-aerial-gazebo-01.webp": {
+      "width": 736,
+      "height": 736
+    },
+    "/images/projects/villa-aerial-gazebo-01-card.webp": {
+      "width": 736,
+      "height": 736
+    },
+    "/images/projects/villa-aerial-pool-01.webp": {
+      "width": 736,
+      "height": 736
+    },
+    "/images/projects/villa-aerial-pool-01-card.webp": {
+      "width": 736,
+      "height": 736
+    },
+    "/images/brand/logo.png": {
+      "width": 1298,
+      "height": 996
+    },
+    "/images/brand/favicon.png": {
+      "width": 512,
+      "height": 512
+    },
+    "/images/brand/og-image.png": {
+      "width": 1200,
+      "height": 630
+    }
+  }
+}

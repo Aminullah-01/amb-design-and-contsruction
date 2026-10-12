@@ -28,7 +28,7 @@ export default function ServiceDetailPage() {
   const whatsappLink = whatsappUrl(quoteMessage)
   const callToRaw = (phone?.international ?? phone?.tel ?? '') as string;
 
-  const related = getRelatedProjects(slug, 3)
+  const related = getRelatedProjects(slug ?? '', 3)
 
   const bannerImage = '/images/projects/villa-aerial-gazebo-01.webp'
   const bannerAlt = 'AMB design and construction project'

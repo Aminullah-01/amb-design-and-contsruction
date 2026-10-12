@@ -10,7 +10,7 @@ import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { buttonVariants } from '@/components/ui/buttonVariants'
 import { getServiceBySlug } from '@/lib/services'
-import { getRelatedProjects } from '@/lib/projects'
+import { getProjectsForService } from '@/lib/projects'
 import { site } from '@/content/site'
 import { telUrl, whatsappUrl } from '@/lib/contact'
 import NotFoundPage from './NotFoundPage'
@@ -26,9 +26,9 @@ export default function ServiceDetailPage() {
   const phone = site.phones?.[0]
   const quoteMessage = `Hello AMB Design and Construction, I would like a free quote for ${service.title}.`
   const whatsappLink = whatsappUrl(quoteMessage)
-  const callToRaw = (phone?.international ?? phone?.tel ?? '') as string;
+  const callNumber = phone?.international ?? phone?.tel ?? ''
 
-  const related = getRelatedProjects(slug ?? '', 3)
+  const related = getProjectsForService(service, 3)
 
   const bannerImage = '/images/projects/villa-aerial-gazebo-01.webp'
   const bannerAlt = 'AMB design and construction project'
@@ -116,9 +116,9 @@ export default function ServiceDetailPage() {
                       <MessageCircle className="h-5 w-5" aria-hidden="true" />
                       Request a Free Quote
                     </Link>
-                    {callToRaw && (
+                    {callNumber && (
                       <Link
-                        to={telUrl(callToRaw) as any}
+                        to={telUrl(callNumber)}
                         className={`${buttonVariants({ variant: 'secondary', size: 'md' })} w-full`}
                       >
                         <Phone className="h-5 w-5" aria-hidden="true" />

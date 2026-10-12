@@ -1,4 +1,4 @@
-import type { Project, ProjectCategory } from '@/types/content'
+import type { Project, ProjectCategory, Service } from '@/types/content'
 import { projects, watermarkedProjects } from '@/content/projects'
 
 const allProjects: Project[] = [...projects, ...watermarkedProjects]
@@ -39,4 +39,38 @@ export function getRelatedProjects(slug: string, limit = 3): Project[] {
   )
 
   return (shared.length > 0 ? shared : others).slice(0, limit)
+}
+
+const SERVICE_CATEGORIES: Record<string, ProjectCategory[]> = {
+  '3d-architectural-visualization': ['3D Render'],
+  'interior-and-exterior-design': ['Interiors'],
+  'architectural-design': ['Residential', 'Commercial'],
+  'building-construction': ['Residential', 'Commercial'],
+  'renovation-and-remodeling': ['Residential', 'Interiors'],
+  'project-supervision': ['Residential', 'Commercial'],
+  'building-consultation': ['Residential', 'Commercial'],
+}
+
+export function getProjectsForService(service: Service, limit = 3): Project[] {
+  const cleared = clearedProjects()
+
+  const byService = cleared.filter((project) =>
+    project.servicesProvided.includes(service.title),
+  )
+
+  const categories = SERVICE_CATEGORIES[service.slug] ?? []
+  const byCategory = cleared.filter(
+    (project) =>
+      !byService.includes(project) &&
+      project.categories.some((category) => categories.includes(category)),
+  )
+
+  const chosen = [...byService, ...byCategory]
+  const rest = cleared.filter((project) => !chosen.includes(project))
+  const fill = [
+    ...rest.filter((project) => project.featured),
+    ...rest.filter((project) => !project.featured),
+  ]
+
+  return [...chosen, ...fill].slice(0, limit)
 }

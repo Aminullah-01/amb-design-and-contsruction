@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AMB Design and Construction Limited — Website
 
 Static, frontend-only portfolio website for **AMB Design and Construction Limited** (Nigeria).
@@ -80,3 +81,6 @@ unknown paths to `index.html` so client-side routes (for example `/portfolio`) r
 
 Task **T01 (project setup)** complete: scaffolding, routing, tooling and placeholder pages.
 Page content and design tokens are added in later tasks.
+=======
+# amb-design-and-contsruction
+>>>>>>> 0899de32ca3f180d50dd863c007269a1993bd0f0

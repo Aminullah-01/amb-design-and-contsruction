@@ -1,6 +1,5 @@
-import { Helmet } from 'react-helmet-async'
 import { Link, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Container from '@/components/ui/Container'
 import Img from '@/components/ui/Img'
@@ -10,8 +9,12 @@ import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import CTABand from '@/components/sections/CTABand'
 import ProjectCard from '@/components/portfolio/ProjectCard'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { getAllProjects, getProjectBySlug, getRelatedProjects } from '@/lib/projects'
 import { isPlaceholder } from '@/lib/placeholder'
+import { breadcrumbSchema } from '@/lib/structured-data'
+import { track } from '@/lib/analytics'
 import NotFoundPage from './NotFoundPage'
 
 type Fact = { label: string; value: string }
@@ -20,6 +23,10 @@ export default function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const project = slug ? getProjectBySlug(slug) : undefined
+
+  useEffect(() => {
+    if (project) track('project_view', { project: project.slug, title: project.title })
+  }, [project])
 
   if (!project || !slug) {
     return <NotFoundPage />
@@ -56,20 +63,27 @@ export default function ProjectDetailPage() {
 
   return (
     <>
-      <Helmet>
-        <title>{`${project.title} | AMB Design and Construction Limited`}</title>
-        <meta name="description" content={project.overview} />
-        <meta property="og:title" content={`${project.title} | AMB Design and Construction Limited`} />
-        <meta property="og:description" content={project.overview} />
-        <meta property="og:type" content="article" />
-        <meta property="og:image" content={project.coverImage.src} />
-      </Helmet>
+      <Seo
+        title={`${project.title} | AMB Design and Construction Limited`}
+        description={project.overview}
+        path={`/portfolio/${project.slug}`}
+        image={project.coverImage.src}
+        type="article"
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Our Work', path: '/portfolio' },
+          { name: project.title, path: `/portfolio/${project.slug}` },
+        ])}
+      />
 
       <div className="relative">
         <div className="relative h-[320px] w-full md:h-[460px] lg:h-[560px]">
           <Img
             src={project.coverImage.src}
             alt={project.coverImage.alt}
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/40 to-ink-900/20" />
@@ -192,7 +206,7 @@ export default function ProjectDetailPage() {
                 >
                   <ArrowLeft className="h-5 w-5" aria-hidden="true" />
                   <span>
-                    <span className="block text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                    <span className="block text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                       Previous
                     </span>
                     <span className="font-semibold text-ink-900 group-hover:text-blue-700">
@@ -205,7 +219,7 @@ export default function ProjectDetailPage() {
                   className="group flex items-center gap-3 text-right text-ink-600 transition hover:text-blue-700 sm:justify-end"
                 >
                   <span>
-                    <span className="block text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                    <span className="block text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                       Next
                     </span>
                     <span className="font-semibold text-ink-900 group-hover:text-blue-700">

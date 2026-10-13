@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Link, useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { clsx } from 'clsx'
@@ -7,7 +6,12 @@ import Img from '@/components/ui/Img'
 import Section from '@/components/ui/Section'
 import ProjectCard from '@/components/portfolio/ProjectCard'
 import { buttonVariants } from '@/components/ui/buttonVariants'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { getAllProjects, getPortfolioCategories, getProjectsByLabel, PORTFOLIO_CATEGORIES } from '@/lib/projects'
+import { PAGE_SEO } from '@/lib/seo'
+import { breadcrumbSchema } from '@/lib/structured-data'
+import { track } from '@/lib/analytics'
 
 const ALL = 'All'
 
@@ -25,28 +29,31 @@ export default function PortfolioPage() {
   const projects = active === ALL ? getAllProjects() : getProjectsByLabel(active)
 
   const select = (label: string) => {
+    track('filter_use', { category: label })
     if (label === ALL) setSearchParams({})
     else setSearchParams({ category: label })
   }
 
   return (
     <>
-      <Helmet>
-        <title>Our Work | AMB Design and Construction Limited</title>
-        <meta
-          name="description"
-          content="Selected projects, 3D renders and scale models by AMB Design and Construction Limited."
-        />
-        <meta property="og:title" content="Our Work | AMB Design and Construction Limited" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo
+        title={PAGE_SEO.portfolio.title}
+        description={PAGE_SEO.portfolio.description}
+        path="/portfolio"
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Our Work', path: '/portfolio' },
+        ])}
+      />
 
       <div className="relative">
         <div className="relative h-[260px] w-full md:h-[360px] lg:h-[420px]">
           <Img
             src="/images/projects/duplex-glass-corner-01.webp"
             alt="Modern duplex with a tall glass corner, timber fins, stone cladding and a paved drive"
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-ink-900/60" />
@@ -81,7 +88,7 @@ export default function PortfolioPage() {
                     onClick={() => select(label)}
                     aria-pressed={isActive}
                     className={clsx(
-                      'rounded-full border px-4 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600',
+                      'inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600',
                       isActive
                         ? 'border-blue-700 bg-blue-700 text-white'
                         : 'border-line bg-white text-ink-600 hover:border-blue-700 hover:text-blue-700',

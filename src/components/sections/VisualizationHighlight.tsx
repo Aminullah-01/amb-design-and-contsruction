@@ -2,6 +2,7 @@ import { Check, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Container from '@/components/ui/Container'
 import Img from '@/components/ui/Img'
+import Reveal from '@/components/ui/Reveal'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { buttonVariants } from '@/components/ui/buttonVariants'
@@ -36,32 +37,38 @@ export default function VisualizationHighlight() {
             </span>
           </div>
 
-          <SectionHeading eyebrow={eyebrow} title="See Your Building Before It Is Built" className="max-w-none">
-            {intro ? <p className="mt-5 text-base text-ink-600 md:text-lg">{intro}</p> : null}
-
-            {bullets.length > 0 ? (
-              <ul className="mt-6 space-y-3">
-                {bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-3">
-                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-700">
-                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                    </span>
-                    <span className="font-medium text-ink-600">{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
-            <Link
-              to={whatsappUrl(message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${buttonVariants({ variant: 'primary', size: 'lg' })} mt-8`}
+          <Reveal>
+            <SectionHeading
+              eyebrow={eyebrow}
+              title="See Your Building Before It Is Built"
+              className="max-w-none"
             >
-              <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              Request a 3D Design
-            </Link>
-          </SectionHeading>
+              {intro ? <p className="mt-5 text-base text-ink-600 md:text-lg">{intro}</p> : null}
+
+              {bullets.length > 0 ? (
+                <ul className="mt-6 space-y-3">
+                  {bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+                        <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                      </span>
+                      <span className="font-medium text-ink-600">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              <Link
+                to={whatsappUrl(message)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${buttonVariants({ variant: 'primary', size: 'lg' })} mt-8`}
+              >
+                <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                Request a 3D Design
+              </Link>
+            </SectionHeading>
+          </Reveal>
         </div>
       </Container>
     </Section>

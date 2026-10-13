@@ -37,7 +37,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             {facts.map((fact, index) => (
               <Fragment key={fact.label}>
                 {index > 0 ? (
-                  <span className="text-ink-400" aria-hidden="true">
+                  <span className="text-ink-600" aria-hidden="true">
                     &middot;
                   </span>
                 ) : null}

@@ -1,6 +1,7 @@
 import { MessageCircle, Send } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Container from '@/components/ui/Container'
+import Reveal from '@/components/ui/Reveal'
 import Section from '@/components/ui/Section'
 import { buttonVariants } from '@/components/ui/buttonVariants'
 import { whatsappUrl } from '@/lib/contact'
@@ -19,7 +20,7 @@ export default function CTABand({
   return (
     <Section background="blue" className="py-12 md:py-16" id="cta">
       <Container>
-        <div className="flex flex-col items-center gap-6 text-center">
+        <Reveal className="flex flex-col items-center gap-6 text-center">
           <h2 className="font-heading text-3xl font-bold text-white md:text-4xl lg:text-5xl">
             {title}
           </h2>
@@ -43,7 +44,7 @@ export default function CTABand({
               Chat on WhatsApp
             </Link>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </Section>
   )

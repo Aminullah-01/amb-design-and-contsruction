@@ -106,9 +106,6 @@ export const projects: Project[] = [
     featured: false,
     cleared: true,
   },
-]
-
-export const watermarkedProjects: Project[] = [
   {
     slug: 'contemporary-timber-stone-facade',
     title: 'Contemporary Timber and Stone Facade',
@@ -121,12 +118,12 @@ export const watermarkedProjects: Project[] = [
     servicesProvided: [],
     overview: 'A contemporary multi-level facade with timber and stone.',
     coverImage: {
-      src: '/images/needs-clearance/contemporary-timber-stone-01.jpg',
+      src: '/images/projects/contemporary-timber-stone-01.webp',
       alt: 'Contemporary multi-level facade with timber and stone',
     },
     gallery: [],
     featured: false,
-    cleared: false,
+    cleared: true,
   },
   {
     slug: 'two-storey-house-with-balcony',
@@ -140,17 +137,17 @@ export const watermarkedProjects: Project[] = [
     servicesProvided: [],
     overview: 'A two-storey house with a balcony and driveway.',
     coverImage: {
-      src: '/images/needs-clearance/duplex-aerial-driveway-01.jpg',
+      src: '/images/projects/duplex-aerial-driveway-01.webp',
       alt: 'Aerial of a two-storey house with a balcony and driveway',
     },
     gallery: [
       {
-        src: '/images/needs-clearance/duplex-front-view-01.jpg',
+        src: '/images/projects/duplex-front-view-01.webp',
         alt: 'Front view of a two-storey house with a balcony and driveway',
       },
     ],
     featured: false,
-    cleared: false,
+    cleared: true,
   },
   {
     slug: 'courtyard-pool-aerial',
@@ -164,12 +161,12 @@ export const watermarkedProjects: Project[] = [
     servicesProvided: [],
     overview: 'An aerial of a pool, parking and courtyard.',
     coverImage: {
-      src: '/images/needs-clearance/courtyard-pool-aerial-01.jpg',
+      src: '/images/projects/courtyard-pool-aerial-01.webp',
       alt: 'Aerial of a pool, parking and courtyard',
     },
     gallery: [],
     featured: false,
-    cleared: false,
+    cleared: true,
   },
   {
     slug: 'flat-roof-bungalow',
@@ -183,20 +180,22 @@ export const watermarkedProjects: Project[] = [
     servicesProvided: [],
     overview: 'A modern flat-roof bungalow with floating steps.',
     coverImage: {
-      src: '/images/needs-clearance/bungalow-stepped-entrance-01.jpg',
+      src: '/images/projects/bungalow-stepped-entrance-01.webp',
       alt: 'Modern flat-roof bungalow with floating steps',
     },
     gallery: [
       {
-        src: '/images/needs-clearance/bungalow-front-elevation-01.jpg',
+        src: '/images/projects/bungalow-front-elevation-01.webp',
         alt: 'Front elevation of a modern flat-roof bungalow with floating steps',
       },
       {
-        src: '/images/needs-clearance/bungalow-site-aerial-01.jpg',
+        src: '/images/projects/bungalow-site-aerial-01.webp',
         alt: 'Aerial of a modern flat-roof bungalow within its neighbourhood',
       },
     ],
     featured: false,
-    cleared: false,
+    cleared: true,
   },
 ]
+
+export const watermarkedProjects: Project[] = []

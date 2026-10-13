@@ -36,10 +36,10 @@ export const site: SiteInfo = {
     link: 'https://wa.me/2349030755246',
     defaultMessage: 'Hello AMB Design and Construction, I would like to enquire about...',
   },
-  email: '[CONFIRM EMAIL]',
-  address: '[ADD ADDRESS]',
-  workingHours: '[ADD HOURS]',
-  mapUrl: '[ADD MAP URL]',
+  email: 'AmbdesignconstructionI@gmail.com',
+  address: 'Pantami Gombe State, Nigeria',
+  workingHours: '[HOURS]',
+  mapUrl: '[URL]',
   credentials: {
     cacNumber: '[ADD CAC NUMBER]',
     memberships: [],
@@ -52,7 +52,7 @@ export const site: SiteInfo = {
     { name: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/2349030755246' },
     { name: 'TikTok', icon: 'tiktok', url: '[ADD URL]' },
     { name: 'Instagram', icon: 'instagram', url: '[ADD URL]' },
-    { name: 'Facebook', icon: 'facebook', url: '[ADD URL]' },
+    { name: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/profile.php?id=61593000240024' },
     { name: 'Pinterest', icon: 'pinterest', url: '[ADD URL]' },
   ],
   mainNav: [

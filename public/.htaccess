@@ -1,0 +1,11 @@
+# Single-page-app fallback for cPanel / Apache hosting.
+# Serves index.html for any URL that does not match a real file or folder,
+# so deep links such as /portfolio/some-project do not return a 404.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

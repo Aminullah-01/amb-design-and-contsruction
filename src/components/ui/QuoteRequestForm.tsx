@@ -4,6 +4,7 @@ import { CheckCircle2, Copy, Send } from 'lucide-react'
 import SocialIcon from '@/components/ui/SocialIcon'
 import { services } from '@/content/services'
 import { whatsappUrl } from '@/lib/contact'
+import { track } from '@/lib/analytics'
 
 type PreferredContact = 'Call' | 'WhatsApp' | 'Email'
 
@@ -43,10 +44,10 @@ const BUDGET_OPTIONS = [
 
 const fieldClass = (invalid: boolean) =>
   clsx(
-    'w-full rounded border bg-white px-4 py-3 text-base text-ink-900 placeholder:text-ink-400 focus:outline-none focus:ring-2',
+    'w-full rounded border bg-white px-4 py-3 text-base text-ink-900 placeholder:text-ink-600 focus:outline-none focus:ring-2',
     invalid
-      ? 'border-red-600 focus:border-red-600 focus:ring-red-600/30'
-      : 'border-line focus:border-blue-600 focus:ring-blue-600/30',
+      ? 'border-red-600 focus:border-red-600 focus:ring-red-600'
+      : 'border-line focus:border-blue-600 focus:ring-blue-600',
   )
 
 function buildMessage(values: FormValues): string {
@@ -101,6 +102,7 @@ export default function QuoteRequestForm() {
 
     const message = buildMessage(values)
     window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer')
+    track('quote_form_submit', { service: values.service, preferred_contact: values.preferredContact })
     setSubmittedMessage(message)
     setCopied(false)
   }
@@ -121,6 +123,8 @@ export default function QuoteRequestForm() {
     setSubmittedMessage(null)
     setCopied(false)
   }
+
+  const errorCount = Object.values(errors).filter(Boolean).length
 
   if (submittedMessage) {
     return (
@@ -174,6 +178,11 @@ export default function QuoteRequestForm() {
       noValidate
       className="rounded-lg border border-line bg-white p-6 shadow-sm md:p-8"
     >
+      <div role="alert" aria-live="assertive" className="sr-only">
+        {errorCount > 0
+          ? `${errorCount} field${errorCount > 1 ? 's' : ''} need attention. Please review the highlighted fields and try again.`
+          : ''}
+      </div>
       <h2 className="font-heading text-xl font-bold text-ink-900 md:text-2xl">
         Request a free quote
       </h2>
@@ -184,12 +193,13 @@ export default function QuoteRequestForm() {
       <div className="mt-6 space-y-5">
         <div>
           <label htmlFor="quote-name" className="block text-sm font-semibold text-ink-900">
-            Full name <span className="text-red-600">*</span>
+            Full name <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <input
             id="quote-name"
             name="name"
             type="text"
+            required
             autoComplete="name"
             value={values.name}
             onChange={update('name')}
@@ -206,12 +216,13 @@ export default function QuoteRequestForm() {
 
         <div>
           <label htmlFor="quote-phone" className="block text-sm font-semibold text-ink-900">
-            Phone / WhatsApp number <span className="text-red-600">*</span>
+            Phone / WhatsApp number <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <input
             id="quote-phone"
             name="phone"
             type="tel"
+            required
             inputMode="tel"
             autoComplete="tel"
             value={values.phone}
@@ -229,11 +240,12 @@ export default function QuoteRequestForm() {
 
         <div>
           <label htmlFor="quote-service" className="block text-sm font-semibold text-ink-900">
-            Service needed <span className="text-red-600">*</span>
+            Service needed <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <select
             id="quote-service"
             name="service"
+            required
             value={values.service}
             onChange={update('service')}
             aria-invalid={Boolean(errors.service)}
@@ -256,12 +268,13 @@ export default function QuoteRequestForm() {
 
         <div>
           <label htmlFor="quote-location" className="block text-sm font-semibold text-ink-900">
-            Project location <span className="text-red-600">*</span>
+            Project location <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <input
             id="quote-location"
             name="location"
             type="text"
+            required
             autoComplete="address-level2"
             value={values.location}
             onChange={update('location')}
@@ -278,7 +291,7 @@ export default function QuoteRequestForm() {
 
         <div>
           <label htmlFor="quote-budget" className="block text-sm font-semibold text-ink-900">
-            Estimated budget range <span className="font-normal text-ink-400">(optional)</span>
+            Estimated budget range <span className="font-normal text-ink-600">(optional)</span>
           </label>
           <select
             id="quote-budget"
@@ -298,12 +311,13 @@ export default function QuoteRequestForm() {
 
         <div>
           <label htmlFor="quote-details" className="block text-sm font-semibold text-ink-900">
-            Project details <span className="text-red-600">*</span>
+            Project details <span aria-hidden="true" className="text-red-600">*</span>
           </label>
           <textarea
             id="quote-details"
             name="details"
             rows={5}
+            required
             value={values.details}
             onChange={update('details')}
             aria-invalid={Boolean(errors.details)}

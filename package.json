@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/check-placeholders.mjs",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-seo.mjs",
     "preview": "vite preview",
+    "check-placeholders": "node scripts/check-placeholders.mjs",
+    "outstanding": "node scripts/check-placeholders.mjs --write",
     "lint": "eslint .",
     "typecheck": "tsc -b",
     "optimize-images": "node scripts/optimize-images.mjs",

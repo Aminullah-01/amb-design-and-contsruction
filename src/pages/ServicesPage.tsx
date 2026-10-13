@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 import Container from '@/components/ui/Container'
 import CTABand from '@/components/sections/CTABand'
 import Img from '@/components/ui/Img'
@@ -6,22 +6,29 @@ import ProcessTimeline from '@/components/sections/ProcessTimeline'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import ServiceCard from '@/components/ui/ServiceCard'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { services } from '@/content/services'
 import { getProjectBySlug } from '@/lib/projects'
+import { PAGE_SEO } from '@/lib/seo'
+import { breadcrumbSchema } from '@/lib/structured-data'
 
 export default function ServicesPage() {
   const bannerProject = getProjectBySlug('modern-duplex-with-glass-corner')
 
   return (
     <>
-      <Helmet>
-        <title>Our Services | AMB Design and Construction Limited</title>
-        <meta name="description" content="From architectural design and 3D visualization to construction, renovation and supervision — one team from design to handover." />
-        <meta property="og:title" content="Our Services | AMB Design and Construction Limited" />
-        <meta property="og:description" content="From architectural design and 3D visualization to construction, renovation and supervision — one team from design to handover." />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo
+        title={PAGE_SEO.services.title}
+        description={PAGE_SEO.services.description}
+        path="/services"
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+        ])}
+      />
 
       <div className="relative">
         <div className="relative h-[260px] w-full md:h-[360px] lg:h-[420px]">
@@ -29,6 +36,7 @@ export default function ServicesPage() {
             <Img
               src={bannerProject.coverImage.src}
               alt={bannerProject.coverImage.alt}
+              priority
               className="absolute inset-0 h-full w-full object-cover"
             />
           ) : null}
@@ -36,7 +44,7 @@ export default function ServicesPage() {
           <div className="absolute inset-0 flex flex-col justify-center">
             <Container>
               <nav aria-label="Breadcrumb" className="mb-4 text-sm text-white/80">
-                <a href="/" className="hover:text-white">Home</a> / <span className="text-white">Services</span>
+                <Link to="/" className="hover:text-white">Home</Link> / <span className="text-white">Services</span>
               </nav>
               <h1 className="font-heading text-3xl font-bold text-white md:text-5xl lg:text-6xl">Our Services</h1>
             </Container>

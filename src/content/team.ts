@@ -3,18 +3,13 @@ import { isPlaceholder } from '@/lib/placeholder'
 
 export const team: TeamMember[] = [
   {
-    name: '[ADD NAME]',
-    role: '[ADD ROLE]',
+    name: 'Musa Abdullahi Musa',
+    role: 'CEO',
     bio: '[ADD BIO]',
   },
   {
-    name: '[ADD NAME]',
-    role: '[ADD ROLE]',
-    bio: '[ADD BIO]',
-  },
-  {
-    name: '[ADD NAME]',
-    role: '[ADD ROLE]',
+    name: 'Aminu Gambo Abubakar',
+    role: 'CTO',
     bio: '[ADD BIO]',
   },
 ]

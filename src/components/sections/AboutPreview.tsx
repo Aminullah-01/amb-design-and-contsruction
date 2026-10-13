@@ -1,6 +1,7 @@
 import { ArrowRight, Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Container from '@/components/ui/Container'
+import Reveal from '@/components/ui/Reveal'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { getProjectBySlug } from '@/lib/projects'
@@ -25,7 +26,7 @@ export default function AboutPreview() {
     <Section background="white" id="about-preview">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="relative">
+          <Reveal className="relative">
             {primary ? (
               <img
                 src={primary.coverImage.src}
@@ -46,38 +47,40 @@ export default function AboutPreview() {
                 className="absolute -right-4 -bottom-6 w-36 rounded-lg border-4 border-white shadow-md sm:w-52"
               />
             ) : null}
-          </div>
+          </Reveal>
 
-          <SectionHeading
-            eyebrow="About AMB"
-            title="One team, from design to handover"
-            className="max-w-none"
-          >
-            <div className="mt-5 space-y-4 text-base text-ink-600 md:text-lg">
-              {PARAGRAPHS.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-
-            <ul className="mt-6 space-y-3">
-              {HIGHLIGHTS.map((highlight) => (
-                <li key={highlight} className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-700">
-                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
-                  <span className="font-medium text-ink-600">{highlight}</span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              to="/about"
-              className="mt-8 inline-flex items-center gap-2 font-semibold text-blue-700 transition-colors hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          <Reveal>
+            <SectionHeading
+              eyebrow="About AMB"
+              title="One team, from design to handover"
+              className="max-w-none"
             >
-              Learn more about us
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </SectionHeading>
+              <div className="mt-5 space-y-4 text-base text-ink-600 md:text-lg">
+                {PARAGRAPHS.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+
+              <ul className="mt-6 space-y-3">
+                {HIGHLIGHTS.map((highlight) => (
+                  <li key={highlight} className="flex items-start gap-3">
+                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+                      <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                    <span className="font-medium text-ink-600">{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                to="/about"
+                className="mt-8 inline-flex items-center gap-2 font-semibold text-blue-700 transition-colors hover:text-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+              >
+                Learn more about us
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </SectionHeading>
+          </Reveal>
         </div>
       </Container>
     </Section>

@@ -6,9 +6,9 @@ import { buttonVariants } from '@/components/ui/buttonVariants'
 import Container from '@/components/ui/Container'
 import { site } from '@/content/site'
 import { telUrl, whatsappUrl } from '@/lib/contact'
+import { track } from '@/lib/analytics'
+import { LOGO_LIGHT, LOGO_WHITE } from '@/lib/brand'
 import { useFocusTrap } from '@/lib/useFocusTrap'
-
-const LOGO_SRC = '/images/brand/logo.png'
 
 export default function Header() {
   const { pathname } = useLocation()
@@ -80,23 +80,16 @@ export default function Header() {
         <Container className="flex h-20 items-center justify-between gap-4">
           <Link
             to="/"
-            className="flex items-center"
+            className="flex min-h-11 items-center"
             aria-label={`${site.name} home`}
           >
-            <span
-              className={clsx(
-                'flex items-center rounded-lg',
-                transparent && 'bg-white p-1.5 shadow-sm',
-              )}
-            >
-              <img
-                src={LOGO_SRC}
-                alt={site.name}
-                width={1298}
-                height={996}
-                className="h-10 w-auto md:h-11"
-              />
-            </span>
+            <img
+              src={transparent ? LOGO_WHITE : LOGO_LIGHT}
+              alt={site.name}
+              width={400}
+              height={307}
+              className="h-10 w-auto md:h-11"
+            />
           </Link>
 
           <nav aria-label="Main" className="hidden lg:flex lg:items-center lg:gap-8">
@@ -115,6 +108,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             <Link
               to={site.cta.to}
+              onClick={() => track('cta_click', { location: 'header' })}
               className={clsx(buttonVariants({ variant: 'primary' }), 'hidden lg:inline-flex')}
             >
               {site.cta.label}
@@ -154,10 +148,10 @@ export default function Header() {
           >
             <div className="flex items-center justify-between border-b border-line p-5">
               <img
-                src={LOGO_SRC}
+                src={LOGO_LIGHT}
                 alt={site.name}
-                width={1298}
-                height={996}
+                width={400}
+                height={307}
                 className="h-10 w-auto"
               />
               <button
@@ -187,7 +181,10 @@ export default function Header() {
               </ul>
               <Link
                 to={site.cta.to}
-                onClick={close}
+                onClick={() => {
+                  track('cta_click', { location: 'header_mobile' })
+                  close()
+                }}
                 className={clsx(buttonVariants({ variant: 'primary' }), 'mt-4 w-full')}
               >
                 {site.cta.label}

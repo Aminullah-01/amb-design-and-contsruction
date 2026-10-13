@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { Building2, Hammer, PaintRoller, Ruler } from 'lucide-react'
+import '@fontsource/lobster-two/latin-700-italic.css'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
@@ -66,7 +67,7 @@ export default function StyleGuidePage() {
                 <div className="p-3">
                   <p className="font-heading text-sm font-bold text-ink-900">{swatch.token}</p>
                   <p className="text-xs font-medium text-ink-600">{swatch.hex}</p>
-                  <p className="mt-1 text-[11px] leading-snug text-ink-400">{swatch.note}</p>
+                  <p className="mt-1 text-[11px] leading-snug text-ink-600">{swatch.note}</p>
                 </div>
               </li>
             ))}
@@ -81,7 +82,7 @@ export default function StyleGuidePage() {
           <div className="mt-10 divide-y divide-line border-t border-line">
             {typeScale.map((item) => (
               <div key={item.label} className="grid gap-3 py-6 md:grid-cols-[220px_1fr] md:items-baseline md:gap-8">
-                <p className="text-xs font-semibold tracking-[0.08em] text-ink-400 uppercase">{item.label}</p>
+                <p className="text-xs font-semibold tracking-[0.08em] text-ink-600 uppercase">{item.label}</p>
                 <p className={item.className}>{item.sample}</p>
               </div>
             ))}

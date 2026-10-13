@@ -82,6 +82,9 @@ export default function Testimonials() {
         />
 
         <div
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Client testimonials"
           className="mt-10"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -126,30 +129,34 @@ export default function Testimonials() {
               <button
                 type="button"
                 onClick={prev}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-ink-700 transition hover:bg-surface"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink-600 transition hover:bg-surface"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="h-5 w-5" aria-hidden="true" />
               </button>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center">
                 {items.map((_, index) => (
                   <button
                     key={index}
                     type="button"
                     onClick={() => goTo(index)}
-                    className={clsx(
-                      'h-2 w-2 rounded-full transition',
-                      active === index ? 'bg-blue-700' : 'bg-ink-400/50',
-                    )}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                     aria-label={`Go to testimonial ${index + 1}`}
                     aria-current={active === index ? 'true' : undefined}
-                  />
+                  >
+                    <span
+                      className={clsx(
+                        'h-2 w-2 rounded-full transition',
+                        active === index ? 'bg-blue-700' : 'bg-ink-400/50',
+                      )}
+                    />
+                  </button>
                 ))}
               </div>
               <button
                 type="button"
                 onClick={next}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-ink-700 transition hover:bg-surface"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink-600 transition hover:bg-surface"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="h-5 w-5" aria-hidden="true" />

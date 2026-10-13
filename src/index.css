@@ -69,3 +69,35 @@
     }
   }
 }
+
+/* Scroll reveal: fade + slide-up, 300ms. Content stays visible by default so
+   prerendered / no-JS pages are never hidden; only elements that begin below
+   the fold are animated, and all motion is off under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transition:
+      opacity 300ms ease-out,
+      transform 300ms ease-out;
+  }
+
+  .reveal-pending {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  /* Above-the-fold hero text: short page-load fade (LCP image is not animated). */
+  .hero-fade {
+    animation: amb-hero-fade 400ms ease-out both;
+  }
+}
+
+@keyframes amb-hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

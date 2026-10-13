@@ -7,9 +7,18 @@ const manifest = manifestData as {
 
 type ImgProps = ImgHTMLAttributes<HTMLImageElement> & {
   src: string
+  priority?: boolean
 }
 
-export default function Img({ src, alt, className, sizes, loading = 'lazy', ...rest }: ImgProps) {
+export default function Img({
+  src,
+  alt,
+  className,
+  sizes,
+  loading,
+  priority = false,
+  ...rest
+}: ImgProps) {
   const base = src.replace(/\.webp$/, '')
   const full = `${base}.webp`
   const card = `${base}-card.webp`
@@ -31,8 +40,9 @@ export default function Img({ src, alt, className, sizes, loading = 'lazy', ...r
       alt={alt}
       width={width ?? fullMeta?.width}
       height={height ?? fullMeta?.height}
-      loading={loading}
-      decoding="async"
+      loading={priority ? 'eager' : (loading ?? 'lazy')}
+      fetchPriority={priority ? 'high' : undefined}
+      decoding={priority ? 'sync' : 'async'}
       className={className}
       {...htmlProps}
     />

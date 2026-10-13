@@ -5,6 +5,7 @@ import Container from '@/components/ui/Container'
 import StatsBar from '@/components/sections/StatsBar'
 import { buttonVariants } from '@/components/ui/buttonVariants'
 import { site } from '@/content/site'
+import { track } from '@/lib/analytics'
 
 const POSTER_SRC = '/images/hero-poster.webp'
 
@@ -31,10 +32,24 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [allowVideo] = useState(canAutoplayVideo)
   const [smallScreen] = useState(isSmallScreen)
-  const [isPlaying, setIsPlaying] = useState(allowVideo)
+  const [showVideo, setShowVideo] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
+  // Mount the video only after the page has loaded so its download never
+  // competes with the poster (LCP) during first paint.
   useEffect(() => {
     if (!allowVideo) return
+    const start = () => setShowVideo(true)
+    if (document.readyState === 'complete') {
+      start()
+      return
+    }
+    window.addEventListener('load', start, { once: true })
+    return () => window.removeEventListener('load', start)
+  }, [allowVideo])
+
+  useEffect(() => {
+    if (!allowVideo || !showVideo) return
     const video = videoRef.current
     if (!video) return
     const start = () => {
@@ -46,7 +61,7 @@ export default function Hero() {
       video.addEventListener('loadeddata', start, { once: true })
       return () => video.removeEventListener('loadeddata', start)
     }
-  }, [allowVideo, smallScreen])
+  }, [allowVideo, showVideo, smallScreen])
 
   const togglePlayback = () => {
     const video = videoRef.current
@@ -80,7 +95,7 @@ export default function Hero() {
             className="absolute inset-0 h-full w-full object-cover"
           />
 
-          {allowVideo ? (
+          {allowVideo && showVideo ? (
             <video
               ref={videoRef}
               autoPlay
@@ -107,7 +122,7 @@ export default function Hero() {
         </div>
 
         <Container className="relative flex flex-1 items-center pt-28 pb-32 md:pt-24 md:pb-40">
-          <div className="max-w-[760px]">
+          <div className="hero-fade max-w-[760px]">
             <p className="text-sm font-semibold tracking-[0.14em] text-blue-500 uppercase">
               Architecture, Design and Construction
             </p>
@@ -119,7 +134,11 @@ export default function Hero() {
               across Nigeria.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <Link to={site.cta.to} className={buttonVariants({ variant: 'primary', size: 'lg' })}>
+              <Link
+                to={site.cta.to}
+                onClick={() => track('cta_click', { location: 'hero' })}
+                className={buttonVariants({ variant: 'primary', size: 'lg' })}
+              >
                 {site.cta.label}
               </Link>
               <Link
@@ -142,12 +161,12 @@ export default function Hero() {
           type="button"
           onClick={handleScrollDown}
           aria-label="Scroll down"
-          className="absolute bottom-24 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-full border border-white/30 bg-ink-900/40 p-2 text-white backdrop-blur transition-colors hover:bg-ink-900/70"
+          className="absolute bottom-24 left-1/2 inline-flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-white/30 bg-ink-900/40 text-white backdrop-blur transition-colors hover:bg-ink-900/70"
         >
           <ChevronDown className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        {allowVideo ? (
+        {allowVideo && showVideo ? (
           <button
             type="button"
             onClick={togglePlayback}

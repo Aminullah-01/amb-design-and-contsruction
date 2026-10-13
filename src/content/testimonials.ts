@@ -1,25 +1,18 @@
 import type { Testimonial } from '@/types/content'
 
-export const showTestimonials = false
+export const showTestimonials = true
 
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
-    name: '[ADD NAME]',
+    name: 'Musa Abdullahi Musa',
     projectType: '[ADD PROJECT TYPE]',
     location: '[ADD LOCATION]',
     quote: '[ADD CLIENT TESTIMONIAL]',
   },
   {
     id: 'testimonial-2',
-    name: '[ADD NAME]',
-    projectType: '[ADD PROJECT TYPE]',
-    location: '[ADD LOCATION]',
-    quote: '[ADD CLIENT TESTIMONIAL]',
-  },
-  {
-    id: 'testimonial-3',
-    name: '[ADD NAME]',
+    name: 'Aminu Gambo Abubakar',
     projectType: '[ADD PROJECT TYPE]',
     location: '[ADD LOCATION]',
     quote: '[ADD CLIENT TESTIMONIAL]',

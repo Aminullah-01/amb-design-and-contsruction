@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { Award, Briefcase, Eye, Lightbulb, Target, UserRound, Wallet, type LucideIcon } from 'lucide-react'
 import Card from '@/components/ui/Card'
@@ -8,10 +7,14 @@ import Img from '@/components/ui/Img'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import CTABand from '@/components/sections/CTABand'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { site } from '@/content/site'
 import { getVisibleTeam } from '@/content/team'
 import { isPlaceholder } from '@/lib/placeholder'
 import { getProjectBySlug } from '@/lib/projects'
+import { PAGE_SEO } from '@/lib/seo'
+import { breadcrumbSchema } from '@/lib/structured-data'
 
 const SHOW_BRAND_IN_THE_FIELD = true
 
@@ -53,27 +56,20 @@ export default function AboutPage() {
 
   return (
     <>
-      <Helmet>
-        <title>About Us | AMB Design and Construction Limited</title>
-        <meta
-          name="description"
-          content="Meet the team behind AMB: quality, affordable and innovative design and construction across Nigeria."
-        />
-        <meta property="og:title" content="About Us | AMB Design and Construction Limited" />
-        <meta
-          property="og:description"
-          content="Meet the team behind AMB: quality, affordable and innovative design and construction across Nigeria."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo title={PAGE_SEO.about.title} description={PAGE_SEO.about.description} path="/about" />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'About', path: '/about' },
+        ])}
+      />
 
       <div className="relative h-[260px] w-full md:h-[360px] lg:h-[420px]">
         {bannerProject ? (
           <Img
             src={bannerProject.coverImage.src}
             alt={bannerProject.coverImage.alt}
-            loading="eager"
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : null}
@@ -98,7 +94,7 @@ export default function AboutPage() {
           <SectionHeading eyebrow="Our Story" title="Who we are" align="center" />
           <div className="mx-auto mt-8 max-w-3xl rounded-lg border border-dashed border-line bg-surface p-6 md:p-8">
             <p className="text-base leading-relaxed text-ink-600 md:text-lg">[ADD STORY]</p>
-            <p className="mt-3 text-sm text-ink-400">
+            <p className="mt-3 text-sm text-ink-600">
               Placeholder. Add two to three short paragraphs about how AMB started, why, and what
               drives the team.
             </p>

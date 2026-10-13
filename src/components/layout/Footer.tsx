@@ -4,28 +4,26 @@ import Container from '@/components/ui/Container'
 import SocialIcon from '@/components/ui/SocialIcon'
 import { site } from '@/content/site'
 import { mailtoUrl, telUrl } from '@/lib/contact'
+import { LOGO_WHITE } from '@/lib/brand'
 import { isPlaceholder } from '@/lib/placeholder'
 
 export default function Footer() {
   const year = new Date().getFullYear()
   const socials = site.socials.filter((social) => !isPlaceholder(social.url))
-  const emailIsPlaceholder = isPlaceholder(site.email)
 
   return (
     <footer className="bg-ink-900 text-white">
       <Container className="py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
-            <span className="inline-flex items-center rounded-lg bg-white p-2">
-              <img
-                src="/images/brand/logo.png"
-                alt={site.name}
-                width={1298}
-                height={996}
-                className="h-11 w-auto"
-                loading="lazy"
-              />
-            </span>
+            <img
+              src={LOGO_WHITE}
+              alt={site.name}
+              width={400}
+              height={307}
+              className="h-11 w-auto"
+              loading="lazy"
+            />
             <p className="mt-5 text-sm leading-relaxed text-white/70">{site.about}</p>
 
             {socials.length > 0 && (
@@ -37,7 +35,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${site.name} on ${social.name}`}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
                     >
                       <SocialIcon name={social.icon} className="h-4 w-4" />
                     </a>
@@ -85,25 +83,23 @@ export default function Footer() {
               ))}
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" aria-hidden="true" />
-                {emailIsPlaceholder ? (
-                  <span>{site.email}</span>
-                ) : (
-                  <a
-                    href={mailtoUrl()}
-                    className="transition-colors hover:text-blue-500"
-                  >
-                    {site.email}
-                  </a>
-                )}
+                <a
+                  href={mailtoUrl()}
+                  className="transition-colors hover:text-blue-500"
+                >
+                  {site.email}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" aria-hidden="true" />
                 <span>{site.address}</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" aria-hidden="true" />
-                <span>{site.workingHours}</span>
-              </li>
+              {!isPlaceholder(site.workingHours) ? (
+                <li className="flex items-start gap-3">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" aria-hidden="true" />
+                  <span>{site.workingHours}</span>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>

@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { Clock, Mail, MapPin, Navigation, Phone } from 'lucide-react'
 import Container from '@/components/ui/Container'
@@ -8,17 +7,20 @@ import SocialIcon from '@/components/ui/SocialIcon'
 import { buttonVariants } from '@/components/ui/buttonVariants'
 import FaqAccordion from '@/components/sections/FaqAccordion'
 import QuoteRequestForm from '@/components/ui/QuoteRequestForm'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { faqs } from '@/content/faqs'
 import { site } from '@/content/site'
 import { mailtoUrl, telUrl, whatsappUrl } from '@/lib/contact'
 import { isPlaceholder } from '@/lib/placeholder'
 import { getProjectBySlug } from '@/lib/projects'
+import { PAGE_SEO } from '@/lib/seo'
+import { breadcrumbSchema } from '@/lib/structured-data'
 
 const ICON_CLASS = 'mt-0.5 h-5 w-5 shrink-0 text-blue-700'
 
 export default function ContactPage() {
   const bannerProject = getProjectBySlug('modern-duplex-with-glass-corner')
-  const emailIsPlaceholder = isPlaceholder(site.email)
   const socials = site.socials.filter((social) => !isPlaceholder(social.url))
   const mapsUrl = !isPlaceholder(site.mapUrl)
     ? site.mapUrl
@@ -28,27 +30,20 @@ export default function ContactPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Contact Us | AMB Design and Construction Limited</title>
-        <meta
-          name="description"
-          content="Call, WhatsApp or email AMB Design and Construction. Request a free quote for design, construction or supervision anywhere in Nigeria."
-        />
-        <meta property="og:title" content="Contact Us | AMB Design and Construction Limited" />
-        <meta
-          property="og:description"
-          content="Call, WhatsApp or email AMB Design and Construction. Request a free quote for design, construction or supervision anywhere in Nigeria."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo title={PAGE_SEO.contact.title} description={PAGE_SEO.contact.description} path="/contact" />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Contact', path: '/contact' },
+        ])}
+      />
 
       <div className="relative h-[260px] w-full md:h-[360px] lg:h-[420px]">
         {bannerProject ? (
           <Img
             src={bannerProject.coverImage.src}
             alt={bannerProject.coverImage.alt}
-            loading="eager"
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : null}
@@ -84,7 +79,7 @@ export default function ContactPage() {
                   <li key={phone.tel} className="flex items-start gap-4">
                     <Phone className={ICON_CLASS} aria-hidden="true" />
                     <div>
-                      <p className="text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                      <p className="text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                         Call us
                       </p>
                       <a
@@ -100,41 +95,39 @@ export default function ContactPage() {
                 <li className="flex items-start gap-4">
                   <Mail className={ICON_CLASS} aria-hidden="true" />
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                    <p className="text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                       Email
                     </p>
-                    {emailIsPlaceholder ? (
-                      <span className="text-base font-semibold text-ink-900">{site.email}</span>
-                    ) : (
-                      <a
-                        href={mailtoUrl(site.email, { subject: 'Project enquiry' })}
-                        className="text-base font-semibold text-ink-900 transition-colors hover:text-blue-700"
-                      >
-                        {site.email}
-                      </a>
-                    )}
+                    <a
+                      href={mailtoUrl(site.email, { subject: 'Project enquiry' })}
+                      className="text-base font-semibold text-ink-900 transition-colors hover:text-blue-700"
+                    >
+                      {site.email}
+                    </a>
                   </div>
                 </li>
 
                 <li className="flex items-start gap-4">
                   <MapPin className={ICON_CLASS} aria-hidden="true" />
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                    <p className="text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                       Address
                     </p>
                     <p className="text-base font-semibold text-ink-900">{site.address}</p>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-4">
-                  <Clock className={ICON_CLASS} aria-hidden="true" />
-                  <div>
-                    <p className="text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
-                      Working hours
-                    </p>
-                    <p className="text-base font-semibold text-ink-900">{site.workingHours}</p>
-                  </div>
-                </li>
+                {!isPlaceholder(site.workingHours) ? (
+                  <li className="flex items-start gap-4">
+                    <Clock className={ICON_CLASS} aria-hidden="true" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
+                        Working hours
+                      </p>
+                      <p className="text-base font-semibold text-ink-900">{site.workingHours}</p>
+                    </div>
+                  </li>
+                ) : null}
               </ul>
 
               <a
@@ -161,7 +154,7 @@ export default function ContactPage() {
 
               {socials.length > 0 ? (
                 <div className="mt-8 border-t border-line pt-6">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-ink-400 uppercase">
+                  <p className="text-xs font-semibold tracking-[0.12em] text-ink-600 uppercase">
                     Follow us
                   </p>
                   <ul className="mt-3 flex flex-wrap items-center gap-3">
@@ -172,7 +165,7 @@ export default function ContactPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${site.name} on ${social.name}`}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-700 transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-blue-50 text-blue-700 transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                         >
                           <SocialIcon name={social.icon} className="h-5 w-5" />
                         </a>

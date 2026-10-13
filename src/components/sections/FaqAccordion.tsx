@@ -1,10 +1,11 @@
 import { useId, useState } from 'react'
 import { clsx } from 'clsx'
-import { Helmet } from 'react-helmet-async'
 import { ChevronDown } from 'lucide-react'
 import Container from '@/components/ui/Container'
 import Section, { type SectionBackground } from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
+import JsonLd from '@/components/seo/JsonLd'
+import { faqSchema } from '@/lib/structured-data'
 import type { Faq } from '@/types/content'
 
 type FaqAccordionProps = {
@@ -31,24 +32,9 @@ export default function FaqAccordion({
 
   if (faqs.length === 0) return null
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  }
-
   return (
     <>
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Helmet>
+      <JsonLd data={faqSchema(faqs)} />
 
       <Section background={background} id={id} className={className}>
         <Container>

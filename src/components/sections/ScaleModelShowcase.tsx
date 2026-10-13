@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Container from '@/components/ui/Container'
 import Img from '@/components/ui/Img'
 import Lightbox, { type LightboxImage } from '@/components/ui/Lightbox'
+import Reveal from '@/components/ui/Reveal'
 import Section from '@/components/ui/Section'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { buttonVariants } from '@/components/ui/buttonVariants'
@@ -34,25 +35,27 @@ export default function ScaleModelShowcase() {
     <Section background="white" id="scale-model-showcase">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <SectionHeading
-            eyebrow="Scale Models"
-            title="Build Models That Bring Designs to Life"
-            className="max-w-none"
-          >
-            <p className="mt-5 text-base text-ink-600 md:text-lg">
-              Physical scale models of building layouts and compounds, shown as built.
-            </p>
-
-            <Link
-              to="/portfolio?category=Scale%20Models"
-              className={`${buttonVariants({ variant: 'primary', size: 'lg' })} mt-8`}
+          <Reveal>
+            <SectionHeading
+              eyebrow="Scale Models"
+              title="Build Models That Bring Designs to Life"
+              className="max-w-none"
             >
-              View Scale Models
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
-          </SectionHeading>
+              <p className="mt-5 text-base text-ink-600 md:text-lg">
+                Physical scale models of building layouts and compounds, shown as built.
+              </p>
 
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
+              <Link
+                to="/portfolio?category=Scale%20Models"
+                className={`${buttonVariants({ variant: 'primary', size: 'lg' })} mt-8`}
+              >
+                View Scale Models
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </Link>
+            </SectionHeading>
+          </Reveal>
+
+          <Reveal className="grid grid-cols-2 grid-rows-2 gap-4" delay={120}>
             <button
               type="button"
               onClick={() => setOpenIndex(0)}
@@ -92,7 +95,7 @@ export default function ScaleModelShowcase() {
                 className="aspect-[4/3] w-full rounded-lg object-cover shadow-sm transition-transform duration-500 group-hover:scale-105"
               />
             </button>
-          </div>
+          </Reveal>
         </div>
       </Container>
 

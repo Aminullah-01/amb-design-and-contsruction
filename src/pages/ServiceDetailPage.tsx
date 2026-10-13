@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Link, useParams } from 'react-router-dom'
 import { Check, MessageCircle, Phone } from 'lucide-react'
 import CTABand from '@/components/sections/CTABand'
@@ -9,10 +8,13 @@ import Section from '@/components/ui/Section'
 import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { buttonVariants } from '@/components/ui/buttonVariants'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { getServiceBySlug } from '@/lib/services'
 import { getProjectsForService } from '@/lib/projects'
 import { site } from '@/content/site'
 import { telUrl, whatsappUrl } from '@/lib/contact'
+import { breadcrumbSchema } from '@/lib/structured-data'
 import NotFoundPage from './NotFoundPage'
 
 export default function ServiceDetailPage() {
@@ -35,20 +37,25 @@ export default function ServiceDetailPage() {
 
   return (
     <>
-      <Helmet>
-        <title>{`${service.title} | AMB Design and Construction Limited`}</title>
-        <meta name="description" content={service.shortDescription} />
-        <meta property="og:title" content={`${service.title} | AMB Design and Construction Limited`} />
-        <meta property="og:description" content={service.shortDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo
+        title={`${service.title} | AMB Design and Construction Limited`}
+        description={service.shortDescription}
+        path={`/services/${service.slug}`}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Services', path: '/services' },
+          { name: service.title, path: `/services/${service.slug}` },
+        ])}
+      />
 
       <div className="relative">
         <div className="relative h-[240px] w-full md:h-[320px] lg:h-[380px]">
           <Img
             src={bannerImage}
             alt={bannerAlt}
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-ink-900/65" />

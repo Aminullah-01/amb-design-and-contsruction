@@ -1,5 +1,6 @@
 import { Eye, ShieldCheck, Users, Wallet, type LucideIcon } from 'lucide-react'
 import Container from '@/components/ui/Container'
+import Reveal from '@/components/ui/Reveal'
 import Section from '@/components/ui/Section'
 
 const BENEFITS: { title: string; text: string; icon: LucideIcon }[] = [
@@ -30,7 +31,7 @@ export default function WhyChooseAmb() {
     <Section background="dark" id="why-choose-amb">
       <Container>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <Reveal>
             <p className="text-xs font-semibold tracking-[0.12em] text-blue-500 uppercase md:text-[13px]">
               Our Promise
             </p>
@@ -42,17 +43,17 @@ export default function WhyChooseAmb() {
               One accountable team for design, construction and supervision, with realistic 3D
               previews, trusted quality and transparent pricing.
             </p>
-          </div>
+          </Reveal>
 
           <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2">
-            {BENEFITS.map((benefit) => (
-              <li key={benefit.title}>
+            {BENEFITS.map((benefit, index) => (
+              <Reveal as="li" key={benefit.title} delay={index * 60}>
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink-800 text-blue-500">
                   <benefit.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <h3 className="mt-4 font-heading text-lg font-bold text-white">{benefit.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-400">{benefit.text}</p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>

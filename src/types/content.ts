@@ -151,3 +151,13 @@ export type TeamMember = {
   bio: string
   photo?: string
 }
+
+export type PrivacyBlock =
+  | { type: 'paragraph'; text: string }
+  | { type: 'list'; items: string[] }
+
+export type PrivacySection = {
+  id: string
+  title: string
+  blocks: PrivacyBlock[]
+}

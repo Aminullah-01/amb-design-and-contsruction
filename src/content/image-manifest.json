@@ -1,6 +1,62 @@
 {
-  "generatedAt": "2026-10-12T11:41:15.469Z",
+  "generatedAt": "2026-10-13T10:44:44.732Z",
   "images": {
+    "/images/projects/bungalow-front-elevation-01.webp": {
+      "width": 1280,
+      "height": 1280
+    },
+    "/images/projects/bungalow-front-elevation-01-card.webp": {
+      "width": 800,
+      "height": 800
+    },
+    "/images/projects/bungalow-site-aerial-01.webp": {
+      "width": 1280,
+      "height": 1280
+    },
+    "/images/projects/bungalow-site-aerial-01-card.webp": {
+      "width": 800,
+      "height": 800
+    },
+    "/images/projects/bungalow-stepped-entrance-01.webp": {
+      "width": 1280,
+      "height": 1280
+    },
+    "/images/projects/bungalow-stepped-entrance-01-card.webp": {
+      "width": 800,
+      "height": 800
+    },
+    "/images/projects/contemporary-timber-stone-01.webp": {
+      "width": 720,
+      "height": 720
+    },
+    "/images/projects/contemporary-timber-stone-01-card.webp": {
+      "width": 720,
+      "height": 720
+    },
+    "/images/projects/courtyard-pool-aerial-01.webp": {
+      "width": 1280,
+      "height": 1280
+    },
+    "/images/projects/courtyard-pool-aerial-01-card.webp": {
+      "width": 800,
+      "height": 800
+    },
+    "/images/projects/duplex-aerial-driveway-01.webp": {
+      "width": 1280,
+      "height": 720
+    },
+    "/images/projects/duplex-aerial-driveway-01-card.webp": {
+      "width": 800,
+      "height": 450
+    },
+    "/images/projects/duplex-front-view-01.webp": {
+      "width": 1280,
+      "height": 720
+    },
+    "/images/projects/duplex-front-view-01-card.webp": {
+      "width": 800,
+      "height": 450
+    },
     "/images/projects/duplex-glass-corner-01.webp": {
       "width": 735,
       "height": 580
@@ -74,16 +130,24 @@
       "height": 794
     },
     "/images/brand/logo.png": {
-      "width": 1298,
-      "height": 996
+      "width": 400,
+      "height": 307
     },
-    "/images/brand/favicon.png": {
-      "width": 512,
-      "height": 512
+    "/images/brand/logo-transparent.png": {
+      "width": 400,
+      "height": 307
+    },
+    "/images/brand/logo-white.png": {
+      "width": 400,
+      "height": 307
     },
     "/images/brand/og-image.png": {
       "width": 1200,
       "height": 630
+    },
+    "/images/brand/favicon.png": {
+      "width": 192,
+      "height": 192
     }
   }
 }

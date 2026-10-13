@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { Check } from 'lucide-react'
 import Container from '@/components/ui/Container'
@@ -8,36 +7,33 @@ import SectionHeading from '@/components/ui/SectionHeading'
 import FaqAccordion from '@/components/sections/FaqAccordion'
 import ProcessTimeline from '@/components/sections/ProcessTimeline'
 import CTABand from '@/components/sections/CTABand'
+import JsonLd from '@/components/seo/JsonLd'
+import Seo from '@/components/seo/Seo'
 import { preparationChecklist } from '@/content/process'
 import { faqs } from '@/content/faqs'
 import { getProjectBySlug } from '@/lib/projects'
+import { PAGE_SEO } from '@/lib/seo'
+import { breadcrumbSchema } from '@/lib/structured-data'
 
 export default function ProcessPage() {
   const bannerProject = getProjectBySlug('two-storey-villa-with-pool')
 
   return (
     <>
-      <Helmet>
-        <title>Our Process | AMB Design and Construction Limited</title>
-        <meta
-          name="description"
-          content="Our six-step process from consultation to handover: what you do, what we do and what you receive at every stage."
-        />
-        <meta property="og:title" content="Our Process | AMB Design and Construction Limited" />
-        <meta
-          property="og:description"
-          content="Our six-step process from consultation to handover: what you do, what we do and what you receive at every stage."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/brand/og-image.png" />
-      </Helmet>
+      <Seo title={PAGE_SEO.process.title} description={PAGE_SEO.process.description} path="/process" />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Process', path: '/process' },
+        ])}
+      />
 
       <div className="relative h-[260px] w-full md:h-[360px] lg:h-[420px]">
         {bannerProject ? (
           <Img
             src={bannerProject.coverImage.src}
             alt={bannerProject.coverImage.alt}
-            loading="eager"
+            priority
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : null}

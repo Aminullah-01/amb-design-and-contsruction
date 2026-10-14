@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T10:44:44.732Z",
+  "generatedAt": "2026-10-14T13:21:14.785Z",
   "images": {
     "/images/projects/bungalow-front-elevation-01.webp": {
       "width": 1280,
@@ -128,6 +128,22 @@
     "/images/mockups/vest-mockup-card.webp": {
       "width": 800,
       "height": 794
+    },
+    "/images/team/ceo-profile.webp": {
+      "width": 853,
+      "height": 1280
+    },
+    "/images/team/ceo-profile-card.webp": {
+      "width": 800,
+      "height": 1200
+    },
+    "/images/team/cto-profile.webp": {
+      "width": 432,
+      "height": 448
+    },
+    "/images/team/cto-profile-card.webp": {
+      "width": 432,
+      "height": 448
     },
     "/images/brand/logo.png": {
       "width": 400,

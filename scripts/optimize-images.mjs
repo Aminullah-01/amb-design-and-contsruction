@@ -10,7 +10,7 @@ const imagesRoot = path.join(root, 'public', 'images')
 // Directories whose images are cleared for publication. Each source gets a
 // full-size WebP and an 800px-wide "card" WebP. Images in needs-clearance are
 // intentionally never touched.
-const CLEARED_DIRS = ['projects', 'mockups']
+const CLEARED_DIRS = ['projects', 'mockups', 'team']
 
 // Brand assets are optimised in place. They are never displayed larger than a
 // few hundred pixels, so shipping them at full resolution cost ~1.1 MB on every

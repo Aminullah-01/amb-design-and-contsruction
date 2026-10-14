@@ -95,8 +95,12 @@ export default function AboutPage() {
           <div className="mx-auto mt-8 max-w-3xl rounded-lg border border-dashed border-line bg-surface p-6 md:p-8">
             <p className="text-base leading-relaxed text-ink-600 md:text-lg">[ADD STORY]</p>
             <p className="mt-3 text-sm text-ink-600">
-              Placeholder. Add two to three short paragraphs about how AMB started, why, and what
-              drives the team.
+              How AMB Started
+              AMB Design and Construction Limited was founded with a vision to transform ideas into reality through innovative architectural design and quality construction. The company was established to provide reliable, creative, and professional building solutions that meet the needs of individuals, families, and businesses. From the beginning, AMB has been committed to combining creativity, technical expertise, and practical solutions to create buildings that are functional, beautiful, and durable.
+              Why We Started
+              We started AMB because we believe that everyone deserves a well-designed, safe, and comfortable space to live and work in. Our mission is to make quality architectural design and construction services accessible to our clients while maintaining high standards of professionalism, affordability, and excellence. We aim to turn our clients' dreams into reality through careful planning, modern design concepts, and quality workmanship.
+              What Drives Our Team
+              What drives the AMB team is our passion for design, our commitment to quality, and our determination to exceed client expectations. We believe in teamwork, integrity, innovation, and continuous improvement. Every project is an opportunity to build trust, create lasting value, and contribute to the development of our communities. At AMB Design and Construction Limited, we do more than design and construct buildings—we build spaces, relationships, and a better future.
             </p>
           </div>
         </Container>
